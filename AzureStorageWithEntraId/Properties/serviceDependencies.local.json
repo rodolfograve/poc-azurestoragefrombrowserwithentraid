@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "identityapp1": {
+      "connectionInfo": "App registration: AzureStorageWithEntraId, Tenant: Emsurge (emsurge.com - Microsoft Entra ID)",
+      "type": "identityapp.default"
+    }
+  }
+}
