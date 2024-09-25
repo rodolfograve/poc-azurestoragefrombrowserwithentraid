@@ -35,7 +35,9 @@ On the home page:
   - Created a simple textbox + button.
   - Added a dependency on IAccessTokenProvider.
   - Added the code to upload a new blob to the Azure Storage account using Entra ID authorization.
-  
+
+In Program.cs:
+  - Configured MSAL.NET to include scopes for Azure Storage.
 
 
 
