@@ -1,7 +1,34 @@
 ﻿@page "/"
+@using Azure.Storage.Blobs
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
 
-<PageTitle>Home</PageTitle>
+<div style="display: flex; flex-direction: column; gap: 1rem; margin-top: 1rem;">
+    <InputTextArea @bind-Value="TextToUpload" style="height: 25rem;" />
+    <button @onclick="OnSaveToAzureStorageClick">Save to Azure Storage</button>
+    @if (Message is not null)
+    {
+        <div>@Message</div>
+    }
+</div>
 
-<h1>Hello, world!</h1>
+@code{
+    [Inject] private IAccessTokenProvider AccessTokenProvider { get; set; } = default!;
+    private string TextToUpload { get; set; } = "";
 
-Welcome to your new app.
+    private string? Message { get; set; }
+
+    private async Task OnSaveToAzureStorageClick()
+    {
+        const string storageAccountBlobEndpoint = "https://nameofstorageaccount.blob.core.windows.net/"; // Replace this with the Blob service endpoint for your own Azure Storage Account.
+        const string blobContainerName = "test";
+
+        var credential = new AccessTokenProviderTokenCredential(AccessTokenProvider);
+        var blobServiceClient = new BlobServiceClient(new Uri(storageAccountBlobEndpoint), credential);
+        var blobContainerClient = blobServiceClient.GetBlobContainerClient(blobContainerName);
+
+        var blobName = Guid.NewGuid().ToString();
+        await blobContainerClient.UploadBlobAsync(blobName, new BinaryData(TextToUpload));
+
+        Message = $"A blob with name {blobName} has been created";
+    }
+}
