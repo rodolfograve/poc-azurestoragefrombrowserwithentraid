@@ -31,7 +31,7 @@ From the Azure Portal:
   - Went to "API Permissions" and "Add a permission". Found "Azure Storage" then "user_impersonation".
   - Granted the admin consent for my organisation.
 
-![image](https://github.com/user-attachments/assets/13fbd360-9ebd-4e6f-baa8-16814c36d844)
+![image](https://github.com/user-attachments/assets/6b4cfa81-6797-41cf-a094-4c7185902f31)
 
 #7- Made all code modifications required to achieve the goal and made a commit.
 
